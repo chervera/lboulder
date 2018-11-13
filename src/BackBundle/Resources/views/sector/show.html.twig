@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sector</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ sector.name }}</td>
+            </tr>
+            <tr>
+                <th>Order</th>
+                <td>{{ sector.order }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ sector.slug }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ sector.image }}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ sector.comments }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{% if sector.active %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Map</th>
+                <td>{{ sector.map }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ sector.code }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ sector.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sector_index', {'zona_id': sector.zona.id}) }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('sector_edit', { 'id': sector.id, 'zona_id': sector.zona.id}) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends 'AppBundle:Default:layout.html.twig' %}
+
+{% block metas %}
+    <title>Reseñas del sector {{sector.name}} en la zona {{sector.zona.name}} en Lleida</title>
+    <meta name="description" content="Reseñas del sector {{sector.name}} en la zona {{sector.zona.name}} en Lleida" />
+{% endblock %}
+
+{% block content %}
+    <section class="main piece sector" style="background: url('{{asset(sector.zona.imgPath)}}') no-repeat center center; background-size: cover; background-attachment: fixed;">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="side-menu">
+                        <h1>Boulder
+                            <strong>{{sector.zona.name}}</strong>
+                        </h1>
+                        <h2>Sector
+                            {{sector.name}}
+                        </h2>
+                        <p>
+                            {{sector.comments | raw}}
+                        </p>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <section class='map jumbotron jumbotron-fluid'>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!---<h3>Reseña del sector <?php echo $sectorSelected["name"]; ?> de <?php echo $zoneSelected["name"]; ?></h3>-->
+                    {# if sector.image %}
+                        <img class="img-fluid" src="{{asset(sector.imagePath)}}" alt="mapa del sector {{sector.name}} de {{sector.zona.name}}"/>
+                    {% endif #}
+
+
+                    {% if sector.map %}
+                        <div class="embed-responsive embed-responsive-21by9">
+                            <iframe src="{{sector.map}}" height="480"></iframe>
+                        </div>
+                    {% else %}
+                        <div class="embed-responsive embed-responsive-21by9">
+                            <div id="map" class="main-map"></div>
+                        </div>
+                    {% endif %}
+
+                    <ul class="summary">
+                        <li class="number"><span>Total Problemas:</span> <span class="value">{{sector.numberTotalRoutes}}</span></li>
+                        <li class="easy counter"><span> < 6A:</span> <span class="value">{{sector.numberEasyRoutes}}</span></li>
+                        <li class="meddium counter"><span> 6A - 6C+:</span> <span class="value">{{sector.numberMediumRoutes}}</span></li>
+                        <li class="hard counter"><span> 7A - 7C+:</span> <span class="value">{{sector.numberHardRoutes}}</span></li>
+                        <li class="super counter"><span> > 8A:</span> <span class="value">{{sector.numberSuperRoutes}}</span></li>
+                    </ul>
+
+                    <!--<ul class="boulders">
+
+    <?php foreach($boulders as $boulder){ ?>
+    <li>
+        <a href="#<?php echo $boulder["slug"]; ?>">
+            <?php echo $boulder["name"]; ?>
+        </a>
+    </li>
+    <?php } ?>
+</ul>-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% for boulder in sector.boulders %}
+
+        <section class="piece" id="{{boulder.slug}}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>{{boulder.name}}</h3>
+                        <div class="vector-container" >
+                            {% set path = asset(vich_uploader_asset(boulder, 'imageFile')) | imagine_filter('boulder_730') %}
+                            <img class="img-fluid" src="{{ path }}" alt="mapa del sector {{boulder.sector.name}} de {{boulder.sector.zona.name}}" />
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{path | image_width}} {{path | image_height}}" class="line-1">
+                            {% for via in boulder.vias %}
+                                {{via.draw | raw}}
+                            {% endfor %}
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="boulders-list">
+
+                            {% for via in boulder.vias %}
+                                <li class="">
+                                    <span class="order {{via.grade.difficultColor}}"><strong>{{via.order}}</strong></span> -
+                                            {% include 'AppBundle:Default:_via-inline.html.twig' with {"via": via} %}
+                                </li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% endfor %}
+
+    <section class="comments jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="disqus_thread"></div>
+                    <script>
+
+                        /**
+                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                        var disqus_config = function () {
+                            this.page.url = '{{absolute_url("sector", {"zona_slug": sector.zona.slug, "sector_slug":sector.slug})}}'; // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.identifier = '{{sector.fullCode}}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+                        (function () { // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://www-lboulder-com.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block includes_footer %}
+    
+    <script>
+
+        // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+        // Australia.
+        function initMap() {
+            console.log("init");
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: {lat: -28.024, lng: 140.887},
+                mapTypeId: google.maps.MapTypeId.SATELLITE
+            });
+            //logo dels markers
+            var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+            var markers = [];
+            var bounds = new google.maps.LatLngBounds();
+
+        {% for boulder in sector.boulders %}
+            {% if boulder.latitudGPS and boulder.longitudGPS %}
+                    var marker = new google.maps.Marker({
+                        position: {lat:{{boulder.latitudGPS}}, lng: {{boulder.longitudGPS}} },
+                        map: map,
+                        //icon: image,
+                        label: "{{boulder.order}}"
+                    });
+                    bounds.extend(marker.getPosition());
+                    markers.push(marker);
+            {% endif %}
+        {% endfor %}
+
+                console.log(bounds);
+                map.fitBounds(bounds);
+            }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{google_maps_api_key}}&callback=initMap"></script>
+
+{% endblock %}

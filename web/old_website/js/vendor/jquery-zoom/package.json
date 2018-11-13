@@ -1,0 +1,92 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "jquery-zoom",
+        "scope": null,
+        "escapedName": "jquery-zoom",
+        "name": "jquery-zoom",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\Projectes\\bloc_lleida"
+    ]
+  ],
+  "_from": "jquery-zoom@latest",
+  "_id": "jquery-zoom@1.7.20",
+  "_inCache": true,
+  "_location": "/jquery-zoom",
+  "_nodeVersion": "6.3.1",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/jquery-zoom-1.7.20.tgz_1493105326391_0.5910254092887044"
+  },
+  "_npmUser": {
+    "name": "jacklmoore",
+    "email": "hello@jacklmoore.com"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "jquery-zoom",
+    "scope": null,
+    "escapedName": "jquery-zoom",
+    "name": "jquery-zoom",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-zoom/-/jquery-zoom-1.7.20.tgz",
+  "_shasum": "25b9f9dc50804b48c21f1796949a5f6ac17fbba7",
+  "_shrinkwrap": null,
+  "_spec": "jquery-zoom",
+  "_where": "D:\\Projectes\\bloc_lleida",
+  "author": {
+    "name": "Jack Moore",
+    "email": "hello@jacklmoore.com",
+    "url": "http://www.jacklmoore.com"
+  },
+  "bugs": {
+    "url": "https://github.com/jackmoore/zoom/issues"
+  },
+  "demo": "http://www.jacklmoore.com/zoom",
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "description": "Enlarge images on click or mouseover.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "25b9f9dc50804b48c21f1796949a5f6ac17fbba7",
+    "tarball": "https://registry.npmjs.org/jquery-zoom/-/jquery-zoom-1.7.20.tgz"
+  },
+  "gitHead": "5df07ec46338bb89d200e035e822cf0462761e1a",
+  "homepage": "http://www.jacklmoore.com/zoom",
+  "keywords": [
+    "zoom",
+    "images",
+    "ui",
+    "jquery-plugin"
+  ],
+  "license": "MIT",
+  "main": "jquery.zoom.js",
+  "maintainers": [
+    {
+      "name": "jacklmoore",
+      "email": "hello@jacklmoore.com"
+    }
+  ],
+  "name": "jquery-zoom",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jackmoore/zoom.git"
+  },
+  "scripts": {},
+  "version": "1.7.20"
+}

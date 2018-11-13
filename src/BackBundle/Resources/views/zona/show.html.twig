@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Zona</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ zona.name }}</td>
+            </tr>
+            <tr>
+                <th>Order</th>
+                <td>{{ zona.order }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ zona.slug }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ zona.image }}</td>
+            </tr>
+            <tr>
+                <th>Introduction</th>
+                <td>{{ zona.introduction }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{% if zona.active %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ zona.code }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ zona.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('zona_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('zona_edit', { 'id': zona.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,11 @@
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+back:
+    resource: "@BackBundle/Controller/"
+    type:     annotation
+    prefix:   /back/
+
+app:
+    resource: '@AppBundle/Resources/config/routing.yml'
+

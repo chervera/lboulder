@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <script src="{{asset("js/vendor/paper/dist/paper-full.js")}}"></script>
+    <script src="{{asset("js/vendor/jquery/dist/jquery.min.js")}}"></script>
+
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <script type="text/paperscript" canvas="canvas-1" src="{{asset("back/js/paper-gestor-vias.js")}}"></script>
+
+    <h1>Via edit</h1>
+
+    {{ form_start(edit_form, {attr: {novalidate: 'novalidate'}}) }}
+    {{ form_widget(edit_form) }}
+
+    <div class="canvas via-vector-editor">
+        <h3>Editor de vias</h3>
+        <div class="via-vector-top">
+            <a id="line" class="active" href="#">line</a>
+            <a class="ball size10" href="#">ball 10</a>
+			<a class="ball size20" href="#">ball 20</a>
+
+            <ul class="legend">
+                <li><span class="current">Via Actual</span></li>
+                <li><span class="startAt">Comparte arrancada</span></li>
+                <li><span class="endAt">Comparte final</span></li>
+            </ul>
+        </div>
+        {% set path = asset(vich_uploader_asset(via.boulder, 'imageFile')) | imagine_filter('boulder_730') %}
+
+        <div class="via-vector-workbench" style="background: url('{{ path }}') no-repeat center top; ">
+            <canvas id="canvas-1" style="border: 1px solid red;" width="{{path | image_width}}" height="{{path | image_height}}"></canvas>
+
+            <div class="via-vector-disabled">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{path | image_width}} {{path | image_height}}" class="line-1">
+                    {% for viaShowd in via.viasSameBoulderNotRelated %}
+                        {{viaShowd.draw | raw}}
+                    {% endfor %}
+                </svg>
+            </div>
+            <div class="via-vector-current">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{path | image_width}} {{path | image_height}}" class="line-1">
+                    {% if via.draw %}
+                        {{via.draw | raw}}
+                    {% endif %}
+                </svg>
+            </div>
+            <div class="via-vector-parent">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{path | image_width}} {{path | image_height}}" class="line-1">
+                    {% if via.parent %}
+                        {{via.parent.draw | raw}}
+                    {% endif %}
+                </svg>
+            </div>    
+            <div class="via-vector-startAt">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{path | image_width}} {{path | image_height}}" class="line-1">
+                    {% if via.startAt %}
+                        {{via.startAt.draw | raw}}
+                    {% endif %}
+                </svg>
+            </div>    
+            <div class="via-vector-endAt">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{path | image_width}} {{path | image_height}}" class="line-1">
+                    {% if via.endAt %}
+                        {{via.endAt.draw | raw}}
+                    {% endif %}
+                </svg>
+            </div>    
+        </div>
+        <textarea id="preview"></textarea>
+        {#<div>
+            <button id="change-width">Cambia Tamaño</button>
+        </div>
+        <div id="svgcontainer" style="width: 500px; border: 1px solid black; background: yellow;">
+            <img src="{{asset(via.boulder.imageFullPath)}}" width="100%"/>
+        </div>
+        <textarea id="result" cols="140" rows="20"></textarea>#}
+    </div>
+
+    <input type="submit" value="Guardar" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('via_index', {"zona_id": via.boulder.sector.zona.id, "sector_id": via.boulder.sector.id, "boulder_id": via.boulder.id }) }}">Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+

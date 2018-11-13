@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Boulder</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ boulder.name }}</td>
+            </tr>
+            <tr>
+                <th>Order</th>
+                <td>{{ boulder.order }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ boulder.slug }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ boulder.image }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ boulder.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('boulder_index', {"zona_id": boulder.sector.zona.id, "sector_id": boulder.sector.id}) }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('boulder_edit', { 'id': boulder.id , "zona_id": boulder.sector.zona.id, "sector_id": boulder.sector.id}) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

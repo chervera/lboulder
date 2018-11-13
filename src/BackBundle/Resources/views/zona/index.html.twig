@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">Zonas</li>
+		</ol>
+	</nav>
+    <h1>Zonas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Order</th>
+                <th>Slug</th>
+                <th>Image</th>
+                <th>Introduction</th>
+                <th>Active</th>
+                <th>Code</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for zona in zonas %}
+            <tr>
+                <td><a href="{{ path('zona_show', { 'id': zona.id }) }}">{{ zona.name }}</a></td>
+                <td>{{ zona.order }}</td>
+                <td>{{ zona.slug }}</td>
+                <td>{{ zona.image }}</td>
+                <td>{{ zona.introduction }}</td>
+                <td>{% if zona.active %}Yes{% else %}No{% endif %}</td>
+                <td>{{ zona.code }}</td>
+                <td>{{ zona.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('zona_show', { 'id': zona.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('zona_edit', { 'id': zona.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('sector_index', { 'zona_id': zona.id }) }}">sectores</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('zona_new') }}">Create a new zona</a>
+        </li>
+    </ul>
+{% endblock %}

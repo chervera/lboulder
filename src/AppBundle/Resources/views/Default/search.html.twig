@@ -1,0 +1,48 @@
+{% extends 'AppBundle:Default:layout.html.twig' %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Busqueda:
+                {{search}}
+            </h1>
+
+
+        </div>
+    </div>
+
+    <section class="search">
+        <div class="container">
+            <div class="row">
+                {% if vias %}
+                    <div class="col-md-6">
+                        <h2>Se han encontrado {{vias | length}} vias:</h2>
+                        <ul class="results vias">
+                            {% for via in vias %}
+                                <li>
+                                    <a href="{{path("sector", {"zona_slug":via.boulder.sector.zona.slug, "sector_slug": via.boulder.sector.slug}) }}">{{via.boulder.sector.zona.name}} - {{via.boulder.sector.name}}</a> -
+                                    {% include 'AppBundle:Default:_via-inline.html.twig' with {"via": via} %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if sectors %}
+                    <div class="col-md-6">
+                        <h2>Se han encontrado {{ sectors | length }} sectores:</h2>
+                        <ul class="results sectores">
+                            {% for sector in sectors %}
+                                <li>
+                                    <a href="{{path("sector", {"zona_slug":sector.zona.slug, "sector_slug": sector.slug}) }}">{{sector.zona.name}} - {{sector.name}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

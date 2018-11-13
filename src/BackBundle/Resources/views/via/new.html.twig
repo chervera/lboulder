@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Via creation</h1>
+
+    {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('via_index', {"zona_id": via.boulder.sector.zona.id, "sector_id": via.boulder.sector.id, "boulder_id": via.boulder.id }) }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Media</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Alt</th>
+                <td>{{ media.alt }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ media.image }}</td>
+            </tr>
+            <tr>
+                <th>Embed</th>
+                <td>{{ media.embed }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ media.type }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ media.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('media_index', {"zona_id": media.via.boulder.sector.zona.id, "sector_id": media.via.boulder.sector.id, "boulder_id": media.via.boulder.id, "via_id": media.via.id}) }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('media_edit', { 'id': media.id,"zona_id": media.via.boulder.sector.zona.id, "sector_id": media.via.boulder.sector.id, "boulder_id": media.via.boulder.id, "via_id": media.via.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

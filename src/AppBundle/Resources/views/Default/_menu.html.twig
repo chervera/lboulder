@@ -1,0 +1,24 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{path('home')}}">LBoulder.com</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% for zona in zonas %}
+                <li class="nav-item dropdown {#<?php echo $zoneSelected["id"]==$zone["id"]?"active": "" ?>" #}">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{zona.name}}</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        {% for sector in zona.sectors %}
+                            <a class="dropdown-item" href="{{path("sector", {"zona_slug":zona.slug, "sector_slug": sector.slug}) }}">{{sector.name}}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <form class="form-inline" action="{{path("search")}}">
+            <input class="form-control mr-sm-2" name="search" type="text" placeholder="Buscar" aria-label="Buscar">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+    </div>
+</nav>

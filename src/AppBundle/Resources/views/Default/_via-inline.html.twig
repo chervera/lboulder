@@ -1,0 +1,30 @@
+<a href="{{path("via", {"zona_slug":via.boulder.sector.zona.slug, "sector_slug": via.boulder.sector.slug, "via_id": via.id}) }}">
+    {{via.realName}} - <strong>
+        {% if via.grade.id == 30 %}
+            <i class="grade_unknown fa fa-question-circle" aria-hidden="true" title="¿Sabes el grado de este bloque? Dinoslo en los comentarios"></i>
+        {% else %}
+            {{via.grade}}
+        {% endif %}
+    </strong>
+</a>
+
+{% if via.mediaImages %}
+    <i class="fa fa-camera featured" aria-hidden="true" title="Tiene {{via.mediaImages | length}} imagenes"></i>								
+{% endif %}
+{% if via.mediaVideos %}
+    <i class="fa fa-video-camera featured" aria-hidden="true" title="Tiene {{via.mediaVideos | length}} videos"></i>
+{% endif %}
+
+
+{% if via.sitStart %}
+    <i class="fa fa-chevron-circle-down" aria-hidden="true" title="Sit start"></i>
+{% endif %}
+{% if via.featured %}
+    <i class="fa fa-heart" aria-hidden="true" title="Recomendada"></i>	
+{% endif %}
+{% if via.expo %}
+    <i class="fa fa-exclamation-triangle" aria-hidden="true" title="Expo"></i>
+{% endif %}
+{% if via.jump %}
+    <i class="fa fa-rocket" aria-hidden="true" title="Salto"></i>
+{% endif %}

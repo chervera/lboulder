@@ -1,0 +1,142 @@
+{% extends 'AppBundle:Default:layout.html.twig' %}
+{% block content %}
+    <div class="jumbotron jumbotron-fluid main-header">
+        <div class="container">
+            <div class="banner-header">
+                <h1 class="display-3">Reseñas boulder Lleida <span class="d-none d-sm-inline">y alrededores</span></h1>
+                <p class="lead">Reseñas de bloque en las zonas de 
+                    {% for zona in zonas %}
+                        {{zona.name}},
+                    {% endfor %}
+                    ...</p>
+            </div>
+        </div>
+    </div>
+    <div id="instafeed"></div>
+    {% for zona in zonas %}
+        <section class="main piece zona">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="zona-main">
+                            <h2 class="name">{{zona.name}}</h2>
+                            <p>{{zona.introduction | raw}}</p>
+                            <img src="{{asset(zona.imgPath)}}" alt="Boulder {{zona.name}}" class="img-fluid" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="sectors">
+                            {% for sector in zona.sectors %}           
+                                <li>
+                                    <a class="title" href="{{path("sector", {"zona_slug":zona.slug, "sector_slug": sector.slug}) }}">{{sector.name}}</a>
+                                    <ul class="summary">
+                                        <li class="easy counter"><span class="help">< 6A</span><span class="value">{{sector.numberEasyRoutes}}</span></li>
+                                        <li class="meddium counter"><span class="help">6A - 6C+</span><span class="value">{{sector.numberMediumRoutes}}</span></li>
+                                        <li class="hard counter"><span class="help">7A - 7C+</span> <span class="value">{{sector.numberHardRoutes}}</span></li>
+                                        <li class="super counter"><span class="help">> 8A</span><span class="value">{{sector.numberSuperRoutes}}</span></li>
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+
+    <section class="last_added jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                {% if lastAddedVias | length > 0 %}
+                    <div class="col-md-6">
+                        <h2>Últimas vias añadidas</h2>
+                        <ul class="results vias">
+                            {% for via in lastAddedVias %}
+                                <li>
+                                    <a href="{{path("sector", {"zona_slug":via.boulder.sector.zona.slug, "sector_slug": via.boulder.sector.slug}) }}">{{via.boulder.sector.zona.name}} - {{via.boulder.sector.name}}</a> -
+                                    {% include 'AppBundle:Default:_via-inline.html.twig' with {"via": via} %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if lastAddedSectors | length > 0 %}
+                    <div class="col-md-6">
+                        <h2>Ultimos sectores añadidos</h2>
+                        <ul class="results sectores">
+                            {% for sector in lastAddedSectors %}
+                                <li>
+                                    <a href="{{path("sector", {"zona_slug":sector.zona.slug, "sector_slug": sector.slug}) }}">
+                                        {{sector.zona.name}} - {{sector.name}}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="last_media jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Últimas imagenes añadidas</h2>
+                    <ul class="results imagenes">
+                        {% for media in lastAddedImages %}
+                            <li>
+                                <h3 class="title">{{media.alt}}</h3>
+                                <div class="path">
+                                    <a href="{{path("sector", {"zona_slug":media.via.boulder.sector.zona.slug, "sector_slug": media.via.boulder.sector.slug}) }}">{{media.via.boulder.sector.zona.name}} - {{media.via.boulder.sector.name}}</a> -
+                                    <a href="{{path("via", {"zona_slug":media.via.boulder.sector.zona.slug, "sector_slug": media.via.boulder.sector.slug, "via_id": media.via.id}) }}">
+                                        {{media.via.realName}} - {{media.via.grade}}
+                                    </a>
+                                </div>
+                                {{media.embed | raw}}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h2>Últimos videos añadidos</h2>
+                    <ul class="results videos">
+                        {% for media in lastAddedVideos %}
+                            <li>
+                                <h3 class="title">{{media.alt}}</h3>
+                                <div class="path">
+                                    <a href="{{path("sector", {"zona_slug":media.via.boulder.sector.zona.slug, "sector_slug": media.via.boulder.sector.slug}) }}">{{media.via.boulder.sector.zona.name}} - {{media.via.boulder.sector.name}}</a> -
+                                    <a href="{{path("via", {"zona_slug":media.via.boulder.sector.zona.slug, "sector_slug": media.via.boulder.sector.slug, "via_id": media.via.id}) }}">
+                                        {{media.via.realName}} - {{media.via.grade}}
+                                    </a>
+                                </div>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    {{media.embed | raw}}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map piece">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Mapa de las zonas de boulder de Lleida</h2>
+                    <div class="embed-responsive embed-responsive-21by9">
+                        {% include 'AppBundle:Default:_map.html.twig' with {'id': 'map', 'classes': 'main-map'} %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block includes_footer %}
+    {% include 'AppBundle:Default:_map-js.html.twig' with {'boulder_points': boulderPoints} %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{google_maps_api_key}}&callback=initMap"></script>
+{% endblock %}

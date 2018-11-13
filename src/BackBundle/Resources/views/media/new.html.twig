@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Media creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('media_index', {"zona_id": media.via.boulder.sector.zona.id, "sector_id": media.via.boulder.sector.id, "boulder_id": media.via.boulder.id, "via_id": media.via.id}) }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

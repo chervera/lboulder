@@ -1,0 +1,203 @@
+{% extends 'AppBundle:Default:layout.html.twig' %}
+
+{% block metas %}
+    <title>Boulder {{via.realName}} en el sector {{via.boulder.sector.name}} en la zona {{via.boulder.sector.zona.name}} en Lleida</title>
+    <meta name="description" content="Boulder {{via.realName}} en el sector {{via.boulder.sector.name}} en la zona {{via.boulder.sector.zona.name}} en Lleida" />
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid via-header">
+		<div class="boulder-background" style="background-image: url({{asset(vich_uploader_asset(via.boulder, 'imageFile')) | imagine_filter('boulder_730')}})"></div>
+        <div class="container">
+            <h1 class="display-3">{{via.realName}} - {{via.grade}}</h1>
+            <h2>
+                <a href="{{path("sector", {"zona_slug":via.boulder.sector.zona.slug, "sector_slug": via.boulder.sector.slug}) }}">
+                    {{via.boulder.sector.zona.name}} - {{via.boulder.sector.name}}
+                </a>
+            </h2>
+            <div class="icons">
+                {% if via.sitStart %}
+                    <i class="fa fa-2x fa-chevron-circle-down" aria-hidden="true" title="Sit start"></i>
+                {% endif %}
+                {% if via.featured %}
+                    <i class="fa fa-2x fa-heart" aria-hidden="true" title="Recomendada"></i>	
+                {% endif %}
+                {% if via.expo %}
+                    <i class="fa fa-2x fa-exclamation-triangle" aria-hidden="true" title="Expo"></i>
+                {% endif %}
+                {% if via.jump %}
+                    <i class="fa fa-2x fa-rocket" aria-hidden="true" title="Salto"></i>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <section class="piece via-content" >
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-8">
+                    <span class="h3">{{via.boulder.name}}</span>
+					
+                    <div class="vector-container" >
+                        {% set path = asset(vich_uploader_asset(via.boulder, 'imageFile')) | imagine_filter('boulder_730') %}
+                        <img class="img-fluid" src="{{ path }}" alt="mapa del sector {{via.boulder.sector.name}} de {{via.boulder.sector.zona.name}}" />
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{path | image_width}} {{path | image_height}}" class="line-1">
+                            <g class="current">
+                                {{via.draw | raw}}
+                            </g>
+                            {% if via.parent %}
+                                <g class="parent" >
+                                    {{via.parent.draw | raw }}
+                                </g>
+                            {% endif %}
+                            {% if via.startAt %}
+                                <g class="start-at" >
+                                    {{via.startAt.draw | raw }}
+                                </g>
+                            {% endif %}
+                            {% if via.endAt %}
+                                <g class="end-at" >
+                                    {{via.endAt.draw | raw }}
+                                </g>
+                            {% endif %}
+                        </svg>
+                    </div>
+                </div>
+                
+				{% if via.comments %}
+				<div class="col-md-4">
+                    
+                        <span class="h3">Comentarios</span>
+                        <p>
+                            {{via.comments}}
+                        </p>
+                    
+                </div>
+				{% endif %}
+            </div>
+        </div>
+    </section>
+
+	<section class="map via-map jumbotron jumbotron-fluid">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<span class="h3">Posición del bloque {{via.boulder.name}}</span>
+					<div class="embed-responsive embed-responsive-21by9">
+						<div id="map" class="main-map"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="media ">
+        <div class="container">
+            <div class="row">
+                {% if via.mediaImages %}
+                    <div class="col-md-6">
+                        <h3>Imagenes</h3>
+                        {% for image in via.mediaImages %}
+                            {% if image.embed %}
+                                <div class="">
+                                    {{ image.embed | raw }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if via.mediaVideos %}
+                    <div class="col-md-6">
+                        <h3>Videos</h3>
+                        {% for video in via.mediaVideos %}
+                            {% if video.embed %}
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    {{ video.embed | raw }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+
+    <section class="media-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p><strong>Si tienes alguna imagen o algun video que quieras incluir en esta pagina, mándala a {{admin_mail}} (Solo fotos de instagram y videos de youtube y vimeo)</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comments jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="disqus_thread"></div>
+                    <script>
+
+                        /**
+                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                        var disqus_config = function () {
+                            this.page.url = '{{absolute_url("via", {"zona_slug": via.boulder.sector.zona.slug, "sector_slug":via.boulder.sector.slug, "via_id": via.id})}}';  // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.identifier = '{{via.realCode}}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+
+                        (function () { // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://www-lboulder-com.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block includes_footer %}
+    <script>
+
+        // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+        // Australia.
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: {lat: -28.024, lng: 140.887},
+                mapTypeId: google.maps.MapTypeId.SATELLITE
+            });
+            //logo dels markers
+            var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+            var markers = [];
+            var bounds = new google.maps.LatLngBounds();
+
+        {% for boulder in via.boulder.sector.boulders %}
+            {% if boulder.latitudGPS and boulder.longitudGPS %}
+                    var marker = new google.maps.Marker({
+                        position: {lat:{{boulder.latitudGPS}}, lng: {{boulder.longitudGPS}} },
+                        map: map,
+                        //icon: image,
+                        label: "{{boulder.order}}"
+                    });
+                    bounds.extend(marker.getPosition());
+                    markers.push(marker);
+            {% endif %}
+        {% endfor %}
+
+                console.log(bounds);
+                map.fitBounds(bounds);
+            }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{google_maps_api_key}}&callback=initMap"></script>
+
+{% endblock %}

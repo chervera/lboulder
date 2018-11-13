@@ -1,0 +1,52 @@
+.container table{width: 100%;}
+.container > ul{padding: 0; list-style: none; border-top: 1px solid #333; margin-top: 15px;}
+.container > ul li{ float: left; margin-right: 15px;}
+.container a, .container input[type='submit']{ background: #333; color: #fff; padding: 10px; border-radius: 3px; display: inline-block; border: 0; width: auto; margin-top: 15px;}
+.container label{ margin-top: 15px; width: 30%;}
+.container input[type='text'], .container input[type='number'], .container textarea{width: 70%;}
+
+.container table tr{border-bottom: 1px solid #ccc; }
+.container table tr td{padding: 10px 0;}
+.container table ul{padding: 0; list-style: none; margin: 0;}
+.container table ul li{}
+.container table tr td > a{background: none; color: #333; font-weight: bold; text-decoration: underline;}
+.container table ul li a{padding: 5px 10px; margin-top: 5px; width: 100%; text-align: center;}
+
+.breadcrumb{margin-top: 15px; background: #333;}
+.breadcrumb li{}
+.breadcrumb li a{display: inline;}
+
+.via-vector-container{position: relative; width: 150px;}
+.via-vector-container v150{width: 150px;}
+.via-vector-container v730{width: 730px;}
+.via-vector-container svg{position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1;}
+
+.via-vector-editor{}
+
+.via-vector-top{}
+.via-vector-top ul{float:right;}
+.via-vector-top ul li{display: inline;}
+.via-vector-top ul li span{border-radius: 2px; color: #fff; padding: 0 5px;}
+.via-vector-top ul li span.current{background: red;}
+.via-vector-top ul li span.startAt{background: green;}
+.via-vector-top ul li span.endAt{background: blue;}
+.via-vector-top ul li span.parent{background: #ffe988;}
+
+.via-vector-workbench{background-size: contain; display: inline-block; position: relative;}
+.via-vector-workbench canvas{z-index: 3; position: relative;}
+.via-vector-workbench svg{position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1;}
+
+.via-vector-disabled, .via-vector-current{position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 2; opacity: 0.5;}
+.via-vector-current path{stroke: red; opacity: 0.5;}
+.via-vector-startAt path{stroke: green; opacity: 0.5;}
+.via-vector-endAt path{stroke: blue; opacity: 0.5;}
+.via-vector-parent path{stroke: #ffe988; opacity: 0.5;}
+
+/* --- liines ediotor --- */
+
+.canvas{display: block; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; margin: 15px 0; padding: 15px 0;}
+#svgcontainer{position: relative;} 
+#svgcontainer svg{position: absolute;left:0; top: 0; bottom: 0; right: 0;}
+button.active{border:1px solid black;}
+
+

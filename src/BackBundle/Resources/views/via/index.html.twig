@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{{path('zona_index')}}">Zonas</a></li>
+			<li class="breadcrumb-item"><a href="{{path('sector_index', {"zona_id": boulder.sector.zona.id})}}">{{boulder.sector.zona.name}}</a></li>
+			<li class="breadcrumb-item"><a href="{{path('boulder_index', {"zona_id": boulder.sector.zona.id, "sector_id": boulder.sector.id})}}">{{boulder.sector.name}}</a></li>			
+			<li class="breadcrumb-item active" aria-current="page">{{boulder.name}}</li>			
+		</ol>
+	</nav>
+
+    <h1>Vias list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Grado</th>
+                <th>Order</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for via in vias %}
+            <tr>
+                <td>
+                    <div class="via-vector-container v150">
+                        {% set path =asset(vich_uploader_asset(via.boulder, 'imageFile')) | imagine_filter('boulder_150') %} 
+                        {% set pathBig =asset(vich_uploader_asset(via.boulder, 'imageFile')) | imagine_filter('boulder_730') %} 
+                        <img src="{{ path }}"/>
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{pathBig | image_width}} {{pathBig | image_height}}" class="line-1">
+                                {{via.draw | raw}}
+                            </svg>
+                    </div>
+                </td>
+                <td><a href="{{ path('via_show', { 'id': via.id, "zona_id": via.boulder.sector.zona.id, "sector_id": via.boulder.sector.id, "boulder_id": via.boulder.id }) }}">{{ via.realName }}</a></td>
+                <td>{{via.grade.name}}</td>
+                <td>{{ via.order }}</td>
+                <td>{{ via.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('via_show', { 'id': via.id, "zona_id": via.boulder.sector.zona.id, "sector_id": via.boulder.sector.id, "boulder_id": via.boulder.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('via_edit', { 'id': via.id, "zona_id": via.boulder.sector.zona.id, "sector_id": via.boulder.sector.id, "boulder_id": via.boulder.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('media_index', {"zona_id": via.boulder.sector.zona.id, "sector_id": via.boulder.sector.id, "boulder_id": via.boulder.id, "via_id": via.id }) }}">medias</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('via_new', { "zona_id": zona_id, "sector_id": sector_id, "boulder_id": boulder_id}) }}">Create a new via</a>
+        </li>
+    </ul>
+{% endblock %}

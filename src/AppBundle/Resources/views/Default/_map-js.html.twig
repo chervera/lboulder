@@ -1,0 +1,30 @@
+<script>
+        // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+        // Australia.
+        function initMap() {
+            console.log("init");
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: {lat: -28.024, lng: 140.887},
+                mapTypeId: google.maps.MapTypeId.SATELLITE
+            });
+            //logo dels markers
+            var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+            var markers = [];
+            var bounds = new google.maps.LatLngBounds();
+
+            {% for boulder_point in boulder_points %}
+                var marker = new google.maps.Marker({
+                    position: {lat:{{boulder_point[0]}}, lng: {{boulder_point[1]}} },
+                    map: map,
+                    //icon: image,
+                    label: "{{boulder_point[2]}}"
+                });
+                bounds.extend(marker.getPosition());
+                markers.push(marker);
+            {% endfor %}
+
+            console.log(bounds);
+            map.fitBounds(bounds);
+        }
+</script>

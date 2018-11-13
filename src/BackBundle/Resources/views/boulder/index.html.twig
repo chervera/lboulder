@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{path('zona_index')}}">Zonas</a></li>
+            <li class="breadcrumb-item"><a href="{{path('sector_index', {'zona_id' : sector.zona.id})}}">{{sector.zona.name}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{sector.name}}</li>			
+        </ol>
+    </nav>
+
+    <h1>Boulders list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Order</th>
+                <th>Slug</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for boulder in boulders %}
+                <tr>
+                    <td>
+                        <div class="via-vector-container v150">
+                            {% set path =asset(vich_uploader_asset(boulder, 'imageFile')) | imagine_filter('boulder_150') %} 
+                            {% set pathBig =asset(vich_uploader_asset(boulder, 'imageFile')) | imagine_filter('boulder_730') %} 
+                            <img src="{{ path }}"/>
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{pathBig | image_width}} {{pathBig | image_height}}" class="line-1">
+                                {% for viaShowd in boulder.vias %}
+                                    {{viaShowd.draw | raw}}
+                                {% endfor %}
+                            </svg>
+                        </div>
+                    </td>
+                    <td><a href="{{ path('boulder_show', { 'id': boulder.id, "zona_id": boulder.sector.zona.id, "sector_id": boulder.sector.id}) }}">{{ boulder.name }}</a></td>
+                    <td>{{ boulder.order }}</td>
+                    <td>{{ boulder.slug }}</td>
+                    <td>{{ boulder.id }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('boulder_show', { 'id': boulder.id, "zona_id": boulder.sector.zona.id, "sector_id": boulder.sector.id}) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('boulder_edit', { 'id': boulder.id, "zona_id": boulder.sector.zona.id, "sector_id": boulder.sector.id}) }}">edit</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('via_index', { "zona_id": boulder.sector.zona.id, "sector_id": boulder.sector.id, "boulder_id": boulder.id}) }}">vias</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('boulder_new', {"zona_id": zona_id, "sector_id": sector_id}) }}">Create a new boulder</a>
+        </li>
+    </ul>
+{% endblock %}

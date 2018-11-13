@@ -1,0 +1,15 @@
+via:
+    path:     /{zona_slug}/{sector_slug}/{via_id}.html
+    defaults: { _controller: 'AppBundle:Default:via' }
+
+sector:
+    path:     /{zona_slug}/{sector_slug}.html
+    defaults: { _controller: 'AppBundle:Default:sector' }
+    
+search:
+    path:     /search.html
+    defaults: { _controller: 'AppBundle:Default:search' }    
+    
+home:
+    path:     /
+    defaults: { _controller: 'AppBundle:Default:index' }

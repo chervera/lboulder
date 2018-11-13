@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{{path('zona_index')}}">Zonas</a></li>
+			<li class="breadcrumb-item active" aria-current="page">{{zona.name}}</li>
+		</ol>
+	</nav>
+    <h1>Sectors list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Order</th>
+                <th>Slug</th>
+                <th>Image</th>
+                <th>Active</th>
+                <th>Code</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sector in sectors %}
+            <tr>
+                <td><a href="{{ path('sector_show', { 'id': sector.id , "zona_id": sector.zona.id}) }}">{{ sector.name }}</a></td>
+                <td>{{ sector.order }}</td>
+                <td>{{ sector.slug }}</td>
+                <td>{{ sector.image }}</td>
+                <td>{% if sector.active %}Yes{% else %}No{% endif %}</td>
+                <td>{{ sector.code }}</td>
+                <td>{{ sector.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('sector_show', { 'id': sector.id , "zona_id": sector.zona.id}) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('sector_edit', { 'id': sector.id , "zona_id": sector.zona.id}) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('boulder_index', { 'id': sector.id , "zona_id": sector.zona.id, "sector_id": sector.id}) }}">boulders</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sector_new',{ "zona_id": zona_id}) }}">Create a new sector</a>
+        </li>
+    </ul>
+{% endblock %}

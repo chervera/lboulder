@@ -1,0 +1,169 @@
+body{font-family: 'Open Sans', sans-serif; color: #343a40;}
+.navbar-brand{font-family: 'Alfa Slab One', cursive;text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;}
+
+h1{font-family: 'Alfa Slab One', cursive; padding-bottom: 0; margin-bottom: 0; font-size: 40px; color: #343a40; }
+h1.display-3{font-size: 4rem; color: #fff;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+.lead{text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;}
+h2{ color: #343a40; font-size: 25px;}
+h2 a{color: #343a40;}
+h3, .h3{ padding-top: 15px; color: #343a40;}
+.banner-header{}
+/*font-family: 'Playfair Display', serif;
+font-family: 'Fascinate Inline', cursive;
+font-family: 'Modak', cursive;
+font-family: 'Abril Fatface', cursive;
+font-family: 'Gloria Hallelujah', cursive;
+font-family: 'Amatic SC', cursive;
+font-family: 'Poiret One', cursive;*/
+
+.title{text-align: right;  }
+.piece{padding-top: 50px;}
+.piece ul {margin-top: 50px; list-style: none; padding: 0;}
+.piece .h3{margin-bottom: 10px; display: inline-block;}
+footer{ padding-bottom: 50px; color: #fff; font-size: 14px;}
+footer .title{text-align: left; font-size: 16px; margin-top: 50px;}
+.boulders a{color: #000; padding-right: 8px; background: url('img/goto.png') no-repeat bottom right;}
+.piece img{border: 2px solid #000;}
+.boulders-list li{margin-bottom: 8px;}
+.boulders-list a{ color: #000;}
+.boulders-list .grade_unknown{color: #c23a3a; font-size:20px;}
+.featured.fa{color: #7fc75c;}
+
+.media-info{padding-top: 50px; padding-bottom: 50px;}
+.jumbotron{margin-bottom: 0;}
+
+
+/* --- icons ---*/
+.expo{background: url('img/expo.png') center center no-repeat; background-size: contain; text-indent: -9999px; height: 15px; width: 15px; display: inline-block;}
+.jump{background: url('img/jump.png') center center no-repeat; background-size: contain; text-indent: -9999px; height: 15px; width: 15px; display: inline-block;}
+.sit_start{background: url('img/sit_start.png') center center no-repeat; background-size: contain; text-indent: -9999px; height: 15px; width: 15px; display: inline-block;}
+/*.featured{background: url('img/featured.png') center center no-repeat; background-size: contain; text-indent: -9999px; height: 15px; width: 15px; display: inline-block;}*/
+
+/* --- difficult --- */
+.order{display: inline-block; width: 30px; text-align:center; font-size: 14px; line-height: 16px; padding-top:2px; border-radius: 2px;}
+.easy{color: white; background-color: #e9bf17; }
+.meddium{color: white; background-color: #06a013;}
+.hard{color: white; background-color:#0a6cbc;}
+.super{color: white; background-color: #c23a3a;}
+
+/* --- summary --- */
+.summary{}
+.summary .number{display:block; font-weight: bold;}
+.summary .counter{ border-radius: 2px; padding: 5px 15px; margin-right: 10px; font-weight: bold; margin-top: 10px;}
+.summary .easy{display: inline-block; }
+.summary .meddium{display: inline-block;}
+.summary .hard{display: inline-block;}
+.summary .super{display: inline-block;}
+
+.sectors .summary{margin-top: 0; margin-bottom: 15px;}
+.sectors .title{ font-size: 25px; color: #000; font-weight: bold; }
+.sectors .summary .counter{}
+.sectors .summary .counter .help{display: none;}
+
+.zona h2{font-size: 35px; font-weight: bold;}
+
+/* --- index --- */
+
+/*
+.zona-main{position: relative;}
+.zona-main .name{font-size: 20px; padding: 10px; position: absolute; bottom: 0; left: 0; right: 0; color: #fff; background: rgba(0,0,0,0.5); margin: 0;}
+*/
+
+/* --- map --- */
+.piece.map{margin-bottom: 50px;}
+.map h2{font-weight: bold;}
+
+/* --- sector --- */
+.sector.piece.main{padding-bottom: 50px; position: relative; }
+.sector.piece.main:before{content: ' '; position: absolute; top: 0; bottom: 0; left: 0; right: 0; background: #343a40; opacity: 0.3;}
+.sector.piece.main h1{color: #fff; text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;}
+.sector.piece.main h2{color: #fff; text-shadow: 1px 0 0 #000, -1px 0 0 #000, 0 1px 0 #000, 0 -1px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;}
+.sector.piece.main p{color: #fff; }
+
+.main-map{position:absolute; bottom: 0; top: 0; left: 0; right: 0;}
+
+/* --- search --- */
+.search{margin: 40px 0;}
+
+/* --- las added --- */
+
+.last_added{margin-top: 50px; background: url(img/cogul-night-back.jpg) no-repeat center center; background-size: cover; background-attachment: fixed;}
+.last_added h2{font-weight: bold; color: #fff;}
+.last_added .results a {color: #fff;}
+.last_added .results i {color: #fff;}
+.last_media ul{padding: 0;}
+.last_media ul li{margin-bottom: 15px;}
+.last_media .title{font-size: 18px; text-align: left; font-weight: bold;}
+.last_media .path{}
+.last_media .path a{font-size: 12px;  }
+
+/* --- results --- */
+.results{list-style: none; margin-top: 15px; padding-left: 15px;}
+.results a{color: #000;}
+
+
+/* --- adds --- */
+.adds{height: 120px;}
+
+/* --- home --- */
+.main-header{background: url(img/cogul-day-back.jpg) no-repeat center center; background-size: cover;}
+.main-header h1{color: #fff;}
+.main-header .lead{color: #fff;}
+
+
+/* --- comments --- */
+.comments{margin-top: 50px;}
+
+/* --- error404 --- */
+.error404 h1{color: #fff; margin-bottom: 50px;}
+.error404 h1 span{color: #c23a3a;}
+.error404 .lead{color: #fff; font-size:28px; text-shadow: none; background: #343a40; display: inline-block; padding: 20px;}
+
+.vector-container{position:relative;}
+.vector-container svg{position: absolute;left:0; top: 0; bottom: 0; right: 0; z-index: 10;}
+.vector-container svg .start-at{opacity: 0.5;}
+.vector-container svg .end-at{opacity: 0.5;}
+
+/*.vector-container svg g:hover path{opacity: 0.3;}
+.vector-container svg g:hover text{opacity: 0.3;}
+.vector-container svg g:hover path[stroke="none"]{opacity: 0.3;}
+.vector-container svg path, .vector-container svg text{transition: 200ms;
+  transition-timing-function: ease-in-out;
+  -webkit-transition: 200ms;
+  -webkit-transition-timing-function: ease-in-out;}
+*/
+
+/* --- via --- */
+.via-map{margin-top: 50px;}
+.via-header{position:relative; overflow:hidden;}
+.via-header .container{z-index:3; position: relative;}
+.via-header .boulder-background{position:absolute; background-size:cover; top: -20%; left: -20%; right: -20%; bottom:-20%; z-index:1; -webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);}
+.via-header .boulder-background:after {
+    content: '\A';
+    position: absolute;
+	z-index: 2;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVQ4y2NgoBJwoJAedcGoC0ZdMOAuAABF0hABJ/8lyQAAAABJRU5ErkJggg==);
+  background-attachment: fixed;
+}
+.via-header h1, .via-header h2 a, .via-header .icons{color: #fff;}
+@media (min-width: 576px) {
+    h1.display-3{font-size: 4.5rem;}
+}
+
+@media (min-width: 768px) { 
+    .piece img{}
+	.piece ul{margin-top: 55px;}
+	.boulders-list li{margin-bottom: 3px;}
+}
+
+@media (min-width: 992px) { 
+
+}
+
+@media (min-width: 1200px) { 
+
+}
